@@ -9,8 +9,8 @@ import (
 	"time"
 
 	"markets-sdk"
-	"markets-sdk/providers/coingecko"
-	"markets-sdk/providers/yahoo"
+	"markets-sdk/pkg/providers/coingecko"
+	"markets-sdk/pkg/providers/yahoo"
 )
 
 // ANSI color codes

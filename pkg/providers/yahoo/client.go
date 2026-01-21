@@ -7,7 +7,7 @@ import (
 	"net/http"
 	"time"
 
-	"markets-sdk"
+	"markets-sdk/pkg/domain"
 )
 
 const baseURL = "https://query2.finance.yahoo.com/v8/finance/chart"
@@ -42,7 +42,7 @@ type chartResponse struct {
 	} `json:"chart"`
 }
 
-func (p *Provider) GetQuote(ctx context.Context, symbol string) (*markets.Quote, error) {
+func (p *Provider) GetQuote(ctx context.Context, symbol string) (*domain.Quote, error) {
 	url := fmt.Sprintf("%s/%s?interval=1m&range=1d", baseURL, symbol)
 
 	req, err := http.NewRequestWithContext(ctx, "GET", url, nil)
@@ -84,7 +84,7 @@ func (p *Provider) GetQuote(ctx context.Context, symbol string) (*markets.Quote,
 	// For this MVP, we will omit volume or could parse it if strictly needed.
 	// Let's stick to price and change for now.
 
-	return &markets.Quote{
+	return &domain.Quote{
 		Symbol:      meta.Symbol,
 		Price:       meta.RegularMarketPrice,
 		Change24h:   change,
